@@ -11,6 +11,13 @@ header{
 }
 }
 
+/* Sun_burst */
+#sun-burst {
+    min-width: 310px;
+    max-width: 800px;
+    margin: 0 auto
+}
+
 /* Slideshow */
 /* Hide the images by default */
   

@@ -39,11 +39,23 @@
         <span class="dot" onclick="currentSlide(3)"></span> 
     </div>
 
+    <div class = "section container">
+        <div id="sun-burst"></div>
+        <form action="#">
+            <p class="range-field">
+                <input type="range" id="sun-burst-range" min="2000" max="2017" step="1" defaultValue="2017"/>
+            </p>
+        </form>
+    </div>
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
     <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/sunburst.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
@@ -51,6 +63,6 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     
     <script src="{{ url_for('static', filename='js/background.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='js/trend_sunburst.js') }}"></script>
 
   </body>
