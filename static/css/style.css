@@ -18,6 +18,13 @@ header{
     margin: 0 auto
 }
 
+
+
+
+#leaflet {
+  height: 500px;
+  width: 600px;
+}
 /* Slideshow */
 /* Hide the images by default */
   

@@ -69,6 +69,7 @@ d3.json(url).then(function(data){
         var year = slide_input.value;
 
         chart.series[0].setData(data[year]);
+        chart.setTitle({text: `Malaria Death ${year}`});
 
     }, false);
 
