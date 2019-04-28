@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
   <title>Malaria Detection and Prevention</title>
 
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -50,7 +51,7 @@
     </div>
 
     <div class = "section container">
-        <div id="leaflet" class="push-m1"></div>
+        <svg width="960" height="500"></svg>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -64,6 +65,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     
@@ -71,6 +73,6 @@
     <script src="{{ url_for('static', filename='js/choropleth.js') }}"></script>
     <script src="{{ url_for('static', filename='js/background.js') }}"></script>
     <script src="{{ url_for('static', filename='js/trend_sunburst.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/trend_leaflet.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/trend_map.js') }}"></script>
 
   </body>
