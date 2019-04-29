@@ -5,13 +5,35 @@
     Promise
       .all([
         d3.tsv('https://unpkg.com/world-atlas@1.1.4/world/50m.tsv'),
-        d3.json('https://unpkg.com/world-atlas@1.1.4/world/50m.json')
+        d3.json('https://unpkg.com/world-atlas@1.1.4/world/50m.json'),
+        d3.json('/dist/death')
       ])
-      .then(([tsvData, topoJSONdata]) => {
+      .then(([tsvData, topoJSONdata, deathDistData]) => {
+
+        const stat_year = deathDistData.year;
+        const stat_data = deathDistData.data;
+
         const rowById = tsvData.reduce((accumulator, d) => {
+
+          var sel_by_country = stat_data.filter(l => l.Country == d.admin);
+
+    
+          stat_year.forEach((year) => {
+
+            if (sel_by_country.length === 1) {
+              d[year] = sel_by_country[0][year];
+            } else {
+              d[year] = '0';
+            }
+
+          });
+
           accumulator[d.iso_n3] = d;
+
           return accumulator;
         }, {});
+
+        console.log(rowById)
 
         const countries = topojson.feature(topoJSONdata, topoJSONdata.objects.countries);
 
@@ -91,8 +113,6 @@
       selectedColorValue
     } = props;
     
-    console.log(features);
-    
     const gUpdate = selection.selectAll('g').data([null]);
     const gEnter = gUpdate.enter().append('g');
     const g = gUpdate.merge(gEnter);
@@ -138,7 +158,7 @@
   const colorScale = d3.scaleOrdinal();
 
   // const colorValue = d => d.properties.income_grp;
-  const colorValue = d => d.properties.economy;
+  const colorValue = d => d.properties['2017'];
 
   let selectedColorValue;
   let features;
@@ -154,6 +174,7 @@
   });
 
   const render = () => {
+
     colorScale
       .domain(features.map(colorValue))
       .domain(colorScale.domain().sort().reverse())

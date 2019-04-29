@@ -16,6 +16,8 @@ incident_df = pd.read_csv(incident_loc,skiprows=[0])
 ########################
 # Agg Death incident and Country information
 ########################
+bin_list = [0,10,100,500,1000,2000,5000,10000]
+
 death_year = list(death_df.columns)
 death_year.remove('Country')
 
@@ -26,6 +28,33 @@ death_country_df = death_df.merge(country_all_df, left_on='Country_merge', right
 death_country_extract_df = death_country_df[death_year+['Country']+['sub-region']+['region']].fillna(0)
 
 death_by_years = []
+
+def categorize_case(case_number):
+    if (case_number > bin_list[-1]):
+        case_category = f"{bin_list[-1]}+"
+    elif (case_number == bin_list[0]):
+        case_category = f"{bin_list[0]}"
+    else: 
+        for i in range(len(bin_list)-1):
+            if ((case_number > bin_list[i]) and (case_number <= bin_list[i+1])):
+                case_category = f"{bin_list[i]}-{bin_list[i+1]}"
+                break
+    return case_category
+
+def get_incident_by_years():
+
+    incident_by_years = {} 
+
+    death_by_category = death_country_extract_df[['Country']+death_year]
+    incident_by_years['year'] = death_year
+
+    for iYear in death_year:
+        death_by_category[iYear] = death_country_extract_df[iYear].apply(categorize_case)
+
+    incident_by_years['data'] = death_by_category.to_dict('records')
+
+    return incident_by_years
+
 
 def get_child_parent_list_by_year(year):
     # World
