@@ -5,8 +5,6 @@ from flask import Flask, jsonify, render_template
 from sqlalchemy import create_engine
 from helper.get_event_by_country import get_child_parent_list, get_incident_by_years
 
-print(get_incident_by_years())
-
 app = Flask(__name__)
 ################## Routes ######################
 @app.route("/")

@@ -15,7 +15,7 @@
 
         const rowById = tsvData.reduce((accumulator, d) => {
 
-          var sel_by_country = stat_data.filter(l => l.Country == d.admin);
+          var sel_by_country = stat_data.filter(l => l['alpha-2'] === d['iso_a2']);
 
     
           stat_year.forEach((year) => {
@@ -32,8 +32,6 @@
 
           return accumulator;
         }, {});
-
-        console.log(rowById)
 
         const countries = topojson.feature(topoJSONdata, topoJSONdata.objects.countries);
 

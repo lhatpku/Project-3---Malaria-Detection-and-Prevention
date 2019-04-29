@@ -1,4 +1,5 @@
 import pandas as pd
+import country_converter as coco
 import os
 
 ########################
@@ -14,20 +15,30 @@ death_df = pd.read_csv(death_loc,skiprows=[0])
 incident_df = pd.read_csv(incident_loc,skiprows=[0])
 
 ########################
-# Agg Death incident and Country information
+# Country to Alpha code
 ########################
-bin_list = [0,10,100,500,1000,2000,5000,10000]
+death_df_name_list = list(death_df['Country'].values)
+death_df_code_list = coco.convert(names=death_df_name_list,to="ISO2")
 
+incident_df_name_list = list(incident_df['Country'].values)
+incident_df_code_list = coco.convert(names=incident_df_name_list,to="ISO2")
+
+death_df['alpha-2'] = death_df_code_list
+incident_df['alpha-2'] = incident_df_code_list
+
+########################
+# Data Agg
+########################
 death_year = list(death_df.columns)
 death_year.remove('Country')
+death_year.remove('alpha-2')
 
-death_df['Country_merge'] = death_df['Country'].apply(lambda x: x.replace(" ", "").lower())
-country_all_df['Country_merge'] = country_all_df['name'].apply(lambda x: x.replace(" ", "").lower())
-
-death_country_df = death_df.merge(country_all_df, left_on='Country_merge', right_on='Country_merge', how='inner')
-death_country_extract_df = death_country_df[death_year+['Country']+['sub-region']+['region']].fillna(0)
-
-death_by_years = []
+death_country_df = death_df.merge(country_all_df, left_on='alpha-2', right_on='alpha-2', how='inner')
+death_country_extract_df = death_country_df[death_year+['Country']+['alpha-2']+['sub-region']+['region']].fillna(0)
+########################
+# Data Export
+########################
+bin_list = [0,10,100,500,1000,2000,5000,10000]
 
 def categorize_case(case_number):
     if (case_number > bin_list[-1]):
@@ -45,7 +56,7 @@ def get_incident_by_years():
 
     incident_by_years = {} 
 
-    death_by_category = death_country_extract_df[['Country']+death_year]
+    death_by_category = death_country_extract_df[['alpha-2']+death_year]
     incident_by_years['year'] = death_year
 
     for iYear in death_year:
@@ -54,7 +65,6 @@ def get_incident_by_years():
     incident_by_years['data'] = death_by_category.to_dict('records')
 
     return incident_by_years
-
 
 def get_child_parent_list_by_year(year):
     # World
