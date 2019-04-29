@@ -1,5 +1,5 @@
 var url = "/sunburst";
-var slide_input = document.querySelector('#sun-burst-range');
+var sunburst_slide_input = document.querySelector('#sun-burst-range');
 
 d3.json(url).then(function(data){
 
@@ -60,13 +60,9 @@ d3.json(url).then(function(data){
 
     });
 
-    slide_input.addEventListener('input', function(event) {
+    sunburst_slide_input.addEventListener('input', function(event) {
 
-        // store current positions in variables
-        // var start = event.target.selectionStart;
-        // var end = event.target.selectionEnd;
-
-        var year = slide_input.value;
+        var year = sunburst_slide_input.value;
 
         chart.series[0].setData(data[year]);
         chart.setTitle({text: `Malaria Death ${year}`});

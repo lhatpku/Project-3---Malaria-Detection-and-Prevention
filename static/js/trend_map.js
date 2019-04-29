@@ -1,3 +1,6 @@
+var death_url = "/dist/death";
+var map_lide_input = document.querySelector('#map-range');
+
 (function (topojson,d3) {
   'use strict';
 
@@ -6,7 +9,7 @@
       .all([
         d3.tsv('https://unpkg.com/world-atlas@1.1.4/world/50m.tsv'),
         d3.json('https://unpkg.com/world-atlas@1.1.4/world/50m.json'),
-        d3.json('/dist/death')
+        d3.json(death_url)
       ])
       .then(([tsvData, topoJSONdata, deathDistData]) => {
 
@@ -195,5 +198,48 @@
       selectedColorValue
     });
   };
+
+  map_lide_input.addEventListener('input', function(event) {
+
+    var year = map_lide_input.value;
+
+    const colorValue = d => d.properties[year];
+
+    const onClick = d => {
+      selectedColorValue = d;
+      render();
+    };
+
+    loadAndProcessData().then(countries => {
+      features = countries.features;
+      render();
+    });
+
+    const render = () => {
+
+      colorScale
+        .domain(features.map(colorValue))
+        .domain(colorScale.domain().sort().reverse())
+        .range(d3.schemeSpectral[colorScale.domain().length]);
+      
+      colorLegendG.call(colorLegend, {
+        colorScale,
+        circleRadius: 8,
+        spacing: 20,
+        textOffset: 12,
+        backgroundRectWidth: 235,
+        onClick,
+        selectedColorValue
+      });
+      
+      choroplethMapG.call(choroplethMap, {
+        features,
+        colorScale,
+        colorValue,
+        selectedColorValue
+      });
+    };
+
+  }, false);
 
 }(topojson,d3));
