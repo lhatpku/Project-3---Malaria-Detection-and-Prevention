@@ -1,4 +1,4 @@
-var death_url = "/dist/death";
+var death_url = "/data/dist/death";
 var map_lide_input = document.querySelector('#map-range');
 
 (function (topojson,d3) {
@@ -20,7 +20,6 @@ var map_lide_input = document.querySelector('#map-range');
 
           var sel_by_country = stat_data.filter(l => l['alpha-2'] === d['iso_a2']);
 
-    
           stat_year.forEach((year) => {
 
             if (sel_by_country.length === 1) {
