@@ -5,7 +5,6 @@ from flask import Flask, jsonify, render_template, flash, request, redirect, ren
 from sqlalchemy import create_engine
 from helper.get_event_by_country import get_child_parent_list, get_incident_by_years
 from werkzeug.utils import secure_filename
-from gevent.pywsgi import WSGIServer
 from ml.Malaria_CNN_Test_Model import predict
 from keras.models import load_model
 import tensorflow as tf
