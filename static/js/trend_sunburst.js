@@ -1,5 +1,5 @@
 var url = "/data/sunburst";
-var sunburst_slide_input = document.querySelector('#sun-burst-range');
+var sunburst_slide_input = document.querySelector('#range');
 
 d3.json(url).then(function(data){
 

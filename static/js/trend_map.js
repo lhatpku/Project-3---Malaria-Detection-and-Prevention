@@ -1,5 +1,5 @@
 var death_url = "/data/dist/death";
-var map_lide_input = document.querySelector('#map-range');
+var map_lide_input = document.querySelector('#range');
 
 (function (topojson,d3) {
   'use strict';

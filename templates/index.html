@@ -9,15 +9,14 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-  <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
-  <link href="{{ url_for('static', filename='css/cnn.css') }}" rel="stylesheet"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cnn.css') }}"> 
   <title>Malaria Detection and Prevention</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Sacramento|Slabo+27px" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Playfair+Display" rel="stylesheet">
   <style>
     #nav-bar {
       position: fixed;
@@ -28,8 +27,16 @@
   </style>
 </head>
   
-<body class="grey lighten-2">
+<body>
 
+    <div class = "section container">
+        <h2>Malaria</h2>
+        <p>Malaria is a disease that is transmitted from person to person by infected mosquitoes.<br>
+            Malaria can be fatal. The World Health Organization (WHO) estimates that 438,000 people died because of malaria in 2015;
+            the Institute of Health Metrics and Evaluation (IHME), Global Burden of Disease (GBD) puts this estimate at 620,000 in 2017.
+        </p>
+    </div>
+        
     <header id = "background">
 
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -43,59 +50,77 @@
         <span class="dot" onclick="currentSlide(3)"></span> 
     </div>
 
+    <!-- Malaria world trend -->
     <div class = "section container">
-        <div id="sun-burst"></div>
-        <form action="#">
-            <p class="range-field">
-                <input type="range" id="sun-burst-range" min="2000" max="2017" step="1" value="2017"/>
+
+        <section>
+
+            <h2>Empirical View</h2>
+
+            <h3>Malaria death by Countries</h3>
+            <p>Africa is the world region that is most affected by malaria: 
+                In 2015, the African continent held 9 out of 10 malaria victims. 
             </p>
-        </form>
+
+            <form name="Trends" class="center row">
+                <p class = "radio-btn">
+                    <label>
+                    <input name="Trend" type="radio" checked value="Sunburst">
+                    <span>Sunburst</span>
+                    </label>
+                </p>
+                <p class="radio-btn">
+                    <label>
+                    <input name="Trend" type="radio" value="Map">
+                    <span>Map</span>
+                    </label>
+                </p>
+            </form>
+
+            <div id="sun-burst"></div>
+            <svg id = "map" width="960" height="600"></svg>
+
+            <form action="#">
+                <p class="range-field">
+                    <input type="range" id="range" min="2000" max="2017" step="1" value="2017"/>
+                </p>
+            </form>
+
+        </section>
+
     </div>
 
     <div class = "section container">
-        <svg width="960" height="500"></svg>
-        <form action="#">
-            <p class="range-field">
-                <input type="range" id="map-range" min="2000" max="2017" step="1" value="2017"/>
-            </p>
-        </form>
-    </div>
-
-
     <h2>Image Classifier</h2>
-    <div>
-        <form id="upload-file" method="post" enctype="multipart/form-data">
-            <label for="imageUpload" class="upload-label">
-                Choose...
-            </label>
-            <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-        </form>
+        <div>
+            <form id="upload-file" method="post" enctype="multipart/form-data">
+                <label for="imageUpload" class="upload-label">
+                    Choose...
+                </label>
+                <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+            </form>
 
-        <div class="image-section" style="display:none;">
-            <div class="img-preview">
-                <div id="imagePreview">
+            <div class="image-section" style="display:none;">
+                <div class="img-preview">
+                    <div id="imagePreview">
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
                 </div>
             </div>
-            <div>
-                <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
-            </div>
+
+            <div class="loader" style="display:none;"></div>
+
+            <h3 id="result">
+                <span> </span>
+            </h3>
         </div>
-
-        <div class="loader" style="display:none;"></div>
-
-        <h3 id="result">
-            <span> </span>
-        </h3>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-
-    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
     <script src="https://code.highcharts.com/highcharts-3d.js"></script>
@@ -111,6 +136,7 @@
     <script src="{{ url_for('static', filename='js/background.js') }}"></script>
     <script src="{{ url_for('static', filename='js/trend_sunburst.js') }}"></script>
     <script src="{{ url_for('static', filename='js/trend_map.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/cnn.js') }}" type="text/javascript"></script> 
+    <script src="{{ url_for('static', filename='js/cnn.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/radio.js') }}"></script> 
 
   </body>
