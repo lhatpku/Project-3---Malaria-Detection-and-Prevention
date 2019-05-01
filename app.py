@@ -46,7 +46,7 @@ def upload():
         f = request.files['file']
 
         # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
+        basepath = os.path.dirname(os.path.realpath(__file__))
         file_path = os.path.join(
             basepath, app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
         f.save(file_path)
