@@ -13,7 +13,7 @@ def predict(model, image_path):
     x = np.expand_dims(x, axis=0)
     x = preprocess_input(x)
     prediction = model.predict(x).round()
-    if prediction == 1:
+    if prediction == 0:
         return 'Infected'
     else:
         return 'Uninfected'
