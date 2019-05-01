@@ -43,19 +43,22 @@ def dist_death():
 def upload():
     if request.method == 'POST':
         # Get the file from post request
-        f = request.files['file']
+        try:
+            f = request.files['file']
 
-        # Save the file to ./uploads
-        basepath = os.path.dirname(os.path.realpath(__file__))
-        file_path = os.path.join(
-            basepath, app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
-        f.save(file_path)
+            # Save the file to ./uploads
+            basepath = os.path.dirname(os.path.realpath(__file__))
+            file_path = os.path.join(
+                basepath, app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
+            f.save(file_path)
 
-        # Make prediction
-        with graph.as_default():
-            preds = predict(model,file_path)
+            # Make prediction
+            with graph.as_default():
+                preds = predict(model,file_path)
 
-        return preds
+            return preds
+        except Exception as e:
+            return f'Excpetion: {e}'
     return None
 
 
