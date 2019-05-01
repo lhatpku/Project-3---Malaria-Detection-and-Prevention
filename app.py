@@ -20,7 +20,7 @@ app.config['UPLOAD_FOLDER'] = 'static/image'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 default_file = 'C12NThinF_IMG_20150614_124212_cell_138.png'
-model_loc = os.path.join('ml','Malaria_CNN_Trained3.h5')
+model_loc = os.path.join('ml','Malaria_CNN_Trained7.h5')
 
 model = load_model(model_loc)
 
