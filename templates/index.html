@@ -91,6 +91,35 @@
     </div>
 
     <div class = "section container">
+        <h2>Prediction</h2>
+        <div class="row">
+            <div class="col s12 m3">
+                <form class="card z-depth-2">
+                    <div class="input-field">
+                        <i class="material-icons prefix">feature</i>
+                        <select class="icons" id="feature-select">
+                            <option value="mortality" selected>Child Mortality</option>
+                            <option value="gdp">GDP Per Capital</option>
+                            <option value="humidity">Humidity</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">model</i>
+                        <select class="icons" id="model-select">
+                            <option value="linear" selected>Linear</option>
+                            <option value="quad" >Quadratic</option>
+                        </select>
+                    </div>    
+                    <button class="btn-large btn-floating waves-effect waves-light blue" type="submit" id = 'regression-submit' name="action">
+                        <i class="material-icons">refresh</i>
+                    </button>
+                </form>
+            </div>
+            <div class="s12 col m8 push-m1" id="regression-plot"></div>
+        </div>
+    </div>
+
+    <div class = "section container">
     <h2>Image Classifier</h2>
         <div>
             <form id="upload-file" method="post" enctype="multipart/form-data">
@@ -138,5 +167,6 @@
     <script src="{{ url_for('static', filename='js/trend_map.js') }}"></script>
     <script src="{{ url_for('static', filename='js/cnn.js') }}"></script> 
     <script src="{{ url_for('static', filename='js/radio.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/regression.js') }}"></script> 
 
   </body>
