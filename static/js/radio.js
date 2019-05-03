@@ -7,11 +7,11 @@ $(document).ready(function(){
     for(var i = 0, max = radios.length; i < max; i++) {
         radios[i].onclick = function() {
             if (this.value === "Sunburst") {
-                $("#sun-burst").fadeIn(700);
-                $("#map").fadeOut(700);
+                $("#map").fadeOut(500);
+                $("#sun-burst").fadeIn(500);
             } else {
-                $("#map").fadeIn(700);
-                $("#sun-burst").fadeOut(700);
+                $("#sun-burst").fadeOut(500);
+                $("#map").fadeIn(500);
             }
         }
     }

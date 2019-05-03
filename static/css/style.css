@@ -90,8 +90,8 @@ header{
     to {opacity: 1}
   }
 
-  .radio-btn {
+  /* .radio-btn {
+    display: inline-block;
 
-    display: inline;
 
-  }
+  } */

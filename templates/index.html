@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
@@ -62,17 +63,17 @@
                 In 2015, the African continent held 9 out of 10 malaria victims. 
             </p>
 
-            <form name="Trends" class="center row">
+            <form name="Trends">
                 <p class = "radio-btn">
                     <label>
                     <input name="Trend" type="radio" checked value="Sunburst">
-                    <span>Sunburst</span>
+                    <span><i class="material-icons">pie_chart</i></span>
                     </label>
                 </p>
                 <p class="radio-btn">
                     <label>
                     <input name="Trend" type="radio" value="Map">
-                    <span>Map</span>
+                    <span><i class="material-icons">map</i></span>
                     </label>
                 </p>
             </form>
@@ -118,32 +119,84 @@
     </div>
 
     <div class = "section container">
-    <h2>Image Classifier</h2>
-        <div>
-            <form id="upload-file" method="post" enctype="multipart/form-data">
-                <label for="imageUpload" class="upload-label">
-                    Choose...
-                </label>
-                <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-            </form>
+        <h2>Image Classifier</h2>
 
-            <div class="image-section" style="display:none;">
-                <div class="img-preview">
-                    <div id="imagePreview">
-                    </div>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
-                </div>
+        <div class="row">
+
+            <div class="col s12 m5">
+
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header"><i class="fas fa-info-circle"></i>Malaria’s mark on the human body</div>
+                        <div class="collapsible-body blue-grey lighten-3"><span>The history of humanity is so closely entangled with the history of malaria that the disease left its mark on our bodies. 
+                            Sickle cell disorder is a genetic disease that deforms red blood cells to be sickle-shaped. 
+                            Carriers suffer from attacks of pain from a young age and their lives are cut short by the condition: it causes around 55,000 deaths every year.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="fas fa-book-medical"></i>Cell Image Detection</div>
+                        <div class="collapsible-body blue-grey lighten-3"><span>Malaria parasites can be identified by examining under the microscope a drop of the patient’s blood, spread out as a “blood smear” on a microscope slide. 
+                            Prior to examination, the specimen is stained to give the parasites a distinctive appearance. 
+                            This technique remains the gold standard for laboratory confirmation of malaria. </span></div>
+                    </li>
+                </ul>
+
             </div>
 
-            <div class="loader" style="display:none;"></div>
+            <div class="col s12 m6 push-m1">
+                <div class="card">
 
-            <h3 id="result">
-                <span> </span>
-            </h3>
+                    <div class="card-action center">
+
+                        <form id="upload-file" method="post" enctype="multipart/form-data">
+                            <label for="imageUpload" class="upload-label">
+                                <i class="fas fa-file-upload"></i>
+                            </label>
+                            <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+                        </form>
+
+                    </div>
+
+                    <div class="card-image center">
+                        <div class="image-section" style="display:none;">
+                            <div class="img-preview">
+                                <div id="imagePreview">
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content center">
+                        <div class="loader" style="display:none;"></div>
+
+                        <h3 id="result">
+                            <span> </span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <footer class="page-footer grey darken-3">
+        <div class="container">
+            <div class="row">
+            <div class="col s12 m8 offset-m2">
+                <h5>About The Project</h5>
+                <p>The project is to give an overview to answer the questions as "what is malaria and how it impacts human society", "how to detect malaria" and "what we can do to better control it"
+                    We use Convolutional Neural Network to detect the disease from cell level and use different regression models to find the best way to control and prevent.
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="footer-copyright grey darken-4">
+            <div class="container center-align">
+            &copy; 2019 Project - Malaria Detection and Prevention: Hao Lu | Eric Yang | Tracy Guo
+            </div>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
@@ -163,6 +216,7 @@
     <script>
         $(document).ready(function(){
             $('select').formSelect();
+            $('.collapsible').collapsible();
         });
     </script>
     
