@@ -97,53 +97,55 @@
             </div>
 
         </section>
+    
+    </div>
 
-        <hr>
-
+    <div class = "section container">
+        <h2>Prediction</h2>
         <section>
-
             <h3>Mosquitoes Population Over-time</h3>
-            <p>bla bla bla 
+            <p>Malaria is caused by a one-celled parasite called a Plasmodium. 
+                Female Anopheles mosquitoes pick up the parasite from infected people when they bite to obtain blood needed to nurture their eggs. 
+                Inside the mosquito the parasites reproduce and develop. When the mosquito bites again, 
+                the parasites contained in the salivary gland are injected and pass into the blood of the person being bitten.
             </p>
-
             <div id="mosquitoes-vector"></div>
             <form action="#">
                 <p class="mosquito-range-field">
                     <input type="range" id="year_range" min="1" max="13" step="1" value="13"/>
                 </p>
             </form>
-
         </section>
-    
-    </div>
-
-
-
-    <div class = "section container">
-        <h2>Prediction</h2>
-        <div class="row">
-            <div class="col s12 m3">
-                <form>
-                    <div class="input-field">
-                        <select class="icons" id="feature-select">
-                            <option value="mortality" selected>Child Mortality</option>
-                            <option value="gdp">GDP Per Capital</option>
-                            <option value="humidity">Humidity</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <select class="icons" id="model-select">
-                            <option value="linear" selected>Linear</option>
-                            <option value="quad" >Quadratic</option>
-                        </select>
-                    </div>    
-                    <button class="btn-large btn-floating waves-effect waves-light blue" type="submit" id = 'regression-submit' name="action">
-                        <i class="material-icons">refresh</i>
-                    </button>
-                </form>
+        <hr>
+        <section>
+            <div class="row">
+                <div class="col s12 m3">
+                    <form class="card z-depth-2">
+                        <div class="card-content">
+                            <div class="input-field">
+                                <select class="icons" id="feature-select">
+                                    <option value="mortality" selected>Child Mortality</option>
+                                    <option value="gdp">GDP Per Capital</option>
+                                    <option value="humidity">Humidity</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <select class="icons" id="model-select">
+                                    <option value="linear" selected>Linear</option>
+                                    <option value="quad" >Quadratic</option>
+                                </select>
+                            </div>    
+                        </div>
+                            <div class="card-action">
+                            <button class="btn-large btn-floating waves-effect waves-light blue" type="submit" id = 'regression-submit' name="action">
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="s12 col m8 push-m1" id="regression-plot"></div>
             </div>
-            <div class="s12 col m8 push-m1" id="regression-plot"></div>
-        </div>
+        </section>
     </div>
 
     <div class = "section container">
