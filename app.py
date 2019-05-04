@@ -43,6 +43,14 @@ def dist_death():
 def age_death():
     return jsonify(get_event_by_age_group())
 
+@app.route('/data/mosquitoes')
+def mosquitoes():
+    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+    mosquitoes_loc = os.path.join(__location__,'data/trend/mosquitoes2.csv')
+    mosquitoes = pd.read_csv(mosquitoes_loc)
+    moquitoes_dict = mosquitoes.to_dict(orient='records')
+    return(jsonify(moquitoes_dict))
+
 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
