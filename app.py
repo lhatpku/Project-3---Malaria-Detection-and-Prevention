@@ -4,6 +4,7 @@ import numpy as np
 from flask import Flask, jsonify, render_template, flash, request, redirect, render_template
 from sqlalchemy import create_engine
 from helper.get_event_by_country import get_child_parent_list, get_incident_by_years
+from helper.get_event_by_age_group import get_event_by_age_group
 from werkzeug.utils import secure_filename
 from ml.Malaria_CNN_Test_Model import predict
 from keras.models import load_model
@@ -37,6 +38,10 @@ def sunburst():
 @app.route('/data/dist/death')
 def dist_death():
     return jsonify(get_incident_by_years())
+
+@app.route('/data/age/death')
+def age_death():
+    return jsonify(get_event_by_age_group())
 
 
 @app.route('/predict', methods=['GET', 'POST'])

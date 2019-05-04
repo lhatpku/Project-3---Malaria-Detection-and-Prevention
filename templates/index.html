@@ -18,14 +18,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/cnn.css') }}"> 
   <title>Malaria Detection and Prevention</title>
   <link href="https://fonts.googleapis.com/css?family=Lato|Playfair+Display" rel="stylesheet">
-  <style>
-    #nav-bar {
-      position: fixed;
-      top: 0;
-      z-index: 999;
-      position: sticky;
-    }
-  </style>
+
 </head>
   
 <body>
@@ -54,9 +47,9 @@
     <!-- Malaria world trend -->
     <div class = "section container">
 
-        <section>
+        <h2>Empirical View</h2>
 
-            <h2>Empirical View</h2>
+        <section>
 
             <h3>Malaria death by Countries</h3>
             <p>Africa is the world region that is most affected by malaria: 
@@ -89,7 +82,25 @@
 
         </section>
 
+        <hr>
+
+        <section>
+
+            <h3>Malaria death by Age Groups</h3>
+            <p>At a global level, the most vulnerable age group to malaria deaths are children under five years old — in 2017 they accounted for 57 percent of total deaths. 
+                The number of deaths from malaria tends to decrease with age; with those over 70 years old accounting for around five percent. 
+                When age categories are combined, children under 14 years old account for more than two-thirds of mortality. 
+            </p>
+
+            <div class="row">
+                <div id="area" class="col m9 push-m1"></div>
+            </div>
+
+        </section>
+
     </div>
+
+
 
     <div class = "section container">
         <h2>Prediction</h2>
@@ -209,7 +220,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -223,6 +236,8 @@
     <script src="{{ url_for('static', filename='js/background.js') }}"></script>
     <script src="{{ url_for('static', filename='js/trend_sunburst.js') }}"></script>
     <script src="{{ url_for('static', filename='js/trend_map.js') }}"></script>
+    <!-- Only for area chart -->
+    <script src="{{ url_for('static', filename='js/trend_area.js') }}"></script>
     <script src="{{ url_for('static', filename='js/cnn.js') }}"></script> 
     <script src="{{ url_for('static', filename='js/radio.js') }}"></script> 
     <script src="{{ url_for('static', filename='js/regression.js') }}"></script> 

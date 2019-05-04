@@ -56,3 +56,19 @@ p {
     -webkit-text-size-adjust: 100%;
     margin-bottom: 1em;
 }
+
+hr {
+    border: dotted 6px grey;
+    border-bottom: none;
+    height: 0px;
+    width:8%;
+    margin: 100px auto;
+    
+}
+
+#range {
+
+    width: 70%;
+    margin: 15px 0 15px 15%;
+
+}
