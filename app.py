@@ -48,6 +48,7 @@ def mosquitoes():
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
     mosquitoes_loc = os.path.join(__location__,'data/trend/mosquitoes2.csv')
     mosquitoes = pd.read_csv(mosquitoes_loc)
+    mosquitoes = mosquitoes.dropna()
     moquitoes_dict = mosquitoes.to_dict(orient='records')
     return(jsonify(moquitoes_dict))
 
