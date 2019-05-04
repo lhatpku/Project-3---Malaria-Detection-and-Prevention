@@ -21,3 +21,12 @@
     stroke: black;
     stroke-opacity: 0.8;
   }
+
+  #mosquitoes-vector {
+
+    height: 600px;
+    min-width: 210px;
+    max-width: 1000px;
+    margin: 0 auto
+
+  }
