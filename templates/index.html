@@ -107,6 +107,11 @@
             </p>
 
             <div id="mosquitoes-vector"></div>
+            <form action="#">
+                <p class="mosquito-range-field">
+                    <input type="range" id="year_range" min="1" max="13" step="1" value="13"/>
+                </p>
+            </form>
 
         </section>
     
@@ -248,6 +253,7 @@
     <script src="{{ url_for('static', filename='js/background.js') }}"></script>
     <script src="{{ url_for('static', filename='js/trend_sunburst.js') }}"></script>
     <script src="{{ url_for('static', filename='js/trend_map.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vector_map.js') }}"></script>
     <!-- Only for area chart -->
     <script src="{{ url_for('static', filename='js/trend_area.js') }}"></script>
     <script src="{{ url_for('static', filename='js/cnn.js') }}"></script> 
