@@ -102,3 +102,10 @@ header{
     z-index: 999;
     position: sticky;
   }
+
+  #mosquitoes-vector {
+    height: 550px;
+    width: 850px;
+    margin: 0 auto;
+    padding: 70px;
+}

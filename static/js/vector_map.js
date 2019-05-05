@@ -1,10 +1,9 @@
 // Create a map object
 var myMap = L.map("mosquitoes-vector", {
     center: [8.7832, 34.5085],
-    zoom: 3
+    zoom: 3,
+    zoomControl:false
   });
-
-
 
 // Leaflet basemap options: https://leaflet-extras.github.io/leaflet-providers/preview/
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}{r}.{ext}', {
@@ -14,6 +13,17 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/
 	maxZoom: 18,
 	ext: 'png'
 }).addTo(myMap);
+
+L.control.zoomslider({position:'topright'}).addTo(myMap);
+L.control.mousePosition().addTo(myMap);
+L.control.scale({position:'bottomleft', metric:false, maxWidth:200}).addTo(myMap);
+L.control.pan().addTo(myMap);
+
+var ctlSidebar = L.control.sidebar('leaflet-side-bar').addTo(myMap);
+var ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
+  ctlSidebar.toggle(); 
+}).addTo(myMap);
+
 
 var vector_url = "/data/mosquitoes";
 var malaria_vector_slide_input = document.querySelector('#year_range');
