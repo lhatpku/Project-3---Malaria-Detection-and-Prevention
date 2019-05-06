@@ -92,8 +92,6 @@ header{
 
   .radio-btn {
     display: inline-block;
-
-
   }
 
   #nav-bar {
@@ -112,4 +110,22 @@ header{
 
 .dust {
   position: absolute;
+}
+
+#cure-infected {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #ddd;
+  box-sizing: border-box;
+}
+
+#body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ddd;
+  box-sizing: border-box;
 }

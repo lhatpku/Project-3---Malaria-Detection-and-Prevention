@@ -59,9 +59,14 @@
         <section>
 
             <h3>Malaria death by Countries</h3>
-            <p>Africa is the world region that is most affected by malaria: 
-                In 2015, the African continent held 9 out of 10 malaria victims. 
-            </p>
+            <p>Malaria occurs mostly in poor, tropical and subtropical areas of the world. Africa is the most affected due to a combination of factors:</p>
+            <ol>
+                <li>A very efficient mosquito (Anopheles gambiae  complex) is responsible for high transmission.</li>
+                <li>The predominant parasite species is Plasmodium falciparum , which is the species that is most likely to cause severe malaria and death.</li>
+                <li>Local weather conditions often allow transmission to occur year round.</li>
+                <li>Scarce resources and socio-economic instability have hindered efficient malaria control activities.</li>
+                <li>In other areas of the world, malaria is a less prominent cause of deaths, but can cause substantial disease and incapacitation, especially in some countries in South America and South Asia.</li>
+            </ol>
 
             <form name="Trends">
                 <p class = "radio-btn" style="margin:0.5rem 1rem 0.5rem 0">
@@ -108,14 +113,15 @@
     </div>
 
     <div class = "section container">
-        <h2>Prediction</h2>
+        <h2>Prediction and Prevention</h2>
         <section>
-            <h3>Mosquitoes Population Over-time</h3>
+            <h3>Malaria and Mosquitoes Population</h3>
             <p>Malaria is caused by a one-celled parasite called a Plasmodium. 
                 Female Anopheles mosquitoes pick up the parasite from infected people when they bite to obtain blood needed to nurture their eggs. 
                 Inside the mosquito the parasites reproduce and develop. When the mosquito bites again, 
                 the parasites contained in the salivary gland are injected and pass into the blood of the person being bitten.
             </p>
+            <h4>Mosquitoes Population Over-time (in Africa)</h4>
             <div id="leaflet-side-bar" class="col s2 m1">
                 <input type="range" orient="vertical" id="year_range" min="1" max="13" step="1" value="13"/>
             </div>
@@ -124,6 +130,7 @@
         </section>
         <hr>
         <section>
+            <h3>Malaria and Other Factors</h3>
             <div class="row">
                 <div class="col s12 m3">
                     <form class="card z-depth-2">
@@ -143,7 +150,7 @@
                             </div>    
                         </div>
                             <div class="card-action">
-                            <button class="btn-large btn-floating waves-effect waves-light blue" type="submit" id = 'regression-submit' name="action">
+                            <button class="btn btn-floating waves-effect waves-light blue" type="submit" id = 'regression-submit' name="action">
                                 <i class="fas fa-chart-line"></i>
                             </button>
                         </div>
@@ -155,24 +162,41 @@
     </div>
 
     <div class = "section container">
-        <h2>Image Classifier</h2>
+        <h2>Malaria Detection</h2>
+
+        <h3>Blood Cell Image to Identify Malaria</h3>
+        <p>Malaria parasites go through a series of steps on their way to causing disease in humans. 
+                When a malaria-carrying mosquito bites a human host, the malaria parasite enters the bloodstream, multiplies in the liver cells, 
+                and is then released back into the bloodstream, where it infects and destroys red blood cells. 
+                Parasites invade red blood cells in an attempt to evade the immune system and to remodel them for their own use.
+        </p>
 
         <div class="row">
 
             <div class="col s12 m5">
 
                 <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header"><i class="fas fa-info-circle"></i>Malaria’s mark on the human body</div>
-                        <div class="collapsible-body blue-grey lighten-3"><span>The history of humanity is so closely entangled with the history of malaria that the disease left its mark on our bodies. 
-                            Sickle cell disorder is a genetic disease that deforms red blood cells to be sickle-shaped. 
-                            Carriers suffer from attacks of pain from a young age and their lives are cut short by the condition: it causes around 55,000 deaths every year.</span></div>
-                    </li>
+                    
                     <li>
                         <div class="collapsible-header"><i class="fas fa-book-medical"></i>Cell Image Detection</div>
-                        <div class="collapsible-body blue-grey lighten-3"><span>Malaria parasites can be identified by examining under the microscope a drop of the patient’s blood, spread out as a “blood smear” on a microscope slide. 
+                        <div class="collapsible-body brown lighten-4"><span>Malaria parasites can be identified by examining under the microscope a drop of the patient’s blood, spread out as a “blood smear” on a microscope slide. 
                             Prior to examination, the specimen is stained to give the parasites a distinctive appearance. 
                             This technique remains the gold standard for laboratory confirmation of malaria. </span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="fas fa-database"></i>Data</div>
+                        <div class="collapsible-body brown lighten-4"><span>
+                            The dataset comes from <a href="https://www.kaggle.com/iarunava/cell-images-for-detecting-malaria">Kaggle</a>. 
+                            The parasitized (infected) cell images are inside the Parasitized folder and uninfected images are inside the Uninfected folder.
+                        </span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="fas fa-laptop-medical"></i>Our Method</div>
+                        <div class="collapsible-body brown lighten-4"><span>
+                            We created the Convolution Layer followed by a MaxPooling layer 
+                            then normalize the output from the previous layers and apply the Dropout regularization. 
+                            Another set of these layers is then appended. 
+                        </span></div>
                     </li>
                 </ul>
 
@@ -211,11 +235,16 @@
                             <span> </span>
                         </h3>
                     </div>
-
-
                 </div>
             </div>
         </div>
+
+        <!-- <div class="body">
+            <div id="cure-infected">
+                <img src="{{ url_for('static', filename='image/C12NThinF_IMG_20150614_124212_cell_187.png') }}" height="400">
+            </div>
+            <button id="cure">Cure</button>
+        </div> -->
     </div>
 
     <footer class="page-footer grey darken-3">

@@ -20,7 +20,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 1.6em;
     font-family: Playfair Display;
     font-weight: 400;
     line-height: 1.25em;
@@ -33,6 +33,7 @@ h3 {
 }
 
 h4 {
+    font-size: 1.3em;
     font-family: Playfair Display;
     font-weight: 400;
     line-height: 1.4em;
@@ -55,6 +56,14 @@ p {
     font-family: Lato;
     -webkit-text-size-adjust: 100%;
     margin-bottom: 1em;
+}
+
+li {
+
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: Lato;
+    -webkit-text-size-adjust: 100%;
 }
 
 hr {
