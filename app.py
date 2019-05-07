@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 from ml.Malaria_CNN_Test_Model import predict
 from keras.models import load_model
 import tensorflow as tf
+from helper.regression import  regress_child,  regress_gdp, regress_rain
 
 global graph
 graph = tf.get_default_graph()
@@ -75,6 +76,17 @@ def upload():
             return f'Excpetion: {e}'
     return None
 
+@app.route('/data/reg/<feature>/<model>')
+def make_regression(feature, model):
+    if model=="linear": 
+        if feature =="Child Mortality": 
+            return jsonify(regress_child())
+
+        elif feature =="GDP": 
+            return jsonify(regress_gdp())
+        
+        elif feature =="Percipitation": 
+            return jsonify(regress_rain())
 
     
 if __name__ == "__main__":
