@@ -1,3 +1,6 @@
+// The dropdown menu
+var period_select = d3.select('#period-select');
+
 // Create a map object
 var myMap = L.map("mosquitoes-vector", {
     center: [8.7832, 34.5085],
@@ -28,23 +31,32 @@ var ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
 var vector_url = "/data/mosquitoes";
 var malaria_vector_slide_input = document.querySelector('#year_range');
 
-d3.json(vector_url).then(function(response) {
+d3.json(vector_url).then(function(response_raw) {
 
-  for (var i = 0; i < response.length; i++) {
+  var circles_layer;
 
-    L.circle([response[i].Lat, response[i].Long], {        
-      color: "#ff7800",
-      fillColor: "#ff7800",}).addTo(myMap)
+  period_select.on('change',function(){
 
-  }
+    if(myMap.hasLayer(circles_layer)){
+      myMap.removeLayer(circles_layer);
+    }
 
-  malaria_vector_slide_input.addEventListener('input', function(event) {
+    var response = response_raw.filter(d => d.Year_Group === this.value);
 
-    var year_cat = malaria_vector_slide_input.value;
+    var circles_list = [];
 
-    myMap.setData(response[Year_Cat]);
-    myMap.setTitle({text: `Malaria Death ${Year_Cat}`});
+    response.forEach(d => {
 
-}, false);
+      circles_list.push(L.circle([d.Lat, d.Long], {        
+        color: "#1ED4AB",
+        fillColor: "#1ED4AB",}))
+
+    });
+
+    circles_layer = L.layerGroup(circles_list);
+    circles_layer.addTo(myMap);
+
+  });
 
 });
+

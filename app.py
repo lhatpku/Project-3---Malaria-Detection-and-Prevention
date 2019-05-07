@@ -10,6 +10,7 @@ from ml.Malaria_CNN_Test_Model import predict
 from keras.models import load_model
 import tensorflow as tf
 from helper.regression import  regress_child,  regress_gdp, regress_rain
+from helper.get_mosquitoes_dist import get_mosquitoes_geo, get_mosquitoes_data_period
 
 global graph
 graph = tf.get_default_graph()
@@ -30,7 +31,8 @@ model = load_model(model_loc)
 ################## Routes ######################
 @app.route('/')
 def index():
-    return render_template("index.html")
+    mosquitoes_data_period = get_mosquitoes_data_period()
+    return render_template("index.html",periods = mosquitoes_data_period)
 
 @app.route('/data/sunburst')
 def sunburst():
@@ -46,11 +48,7 @@ def age_death():
 
 @app.route('/data/mosquitoes')
 def mosquitoes():
-    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    mosquitoes_loc = os.path.join(__location__,'data/trend/mosquitoes2.csv')
-    mosquitoes = pd.read_csv(mosquitoes_loc)
-    mosquitoes = mosquitoes.dropna()
-    moquitoes_dict = mosquitoes.to_dict(orient='records')
+    moquitoes_dict = get_mosquitoes_geo()
     return(jsonify(moquitoes_dict))
 
 
