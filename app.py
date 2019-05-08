@@ -11,6 +11,7 @@ from keras.models import load_model
 import tensorflow as tf
 from helper.regression import  regress_child,  regress_gdp, regress_rain
 from helper.get_mosquitoes_dist import get_mosquitoes_geo, get_mosquitoes_data_period
+from helper.get_classification_data import get_death_prec_temp_data, get_incident_prec_temp_data
 
 global graph
 graph = tf.get_default_graph()
@@ -85,6 +86,20 @@ def make_regression(feature, model):
         
         elif feature =="Percipitation": 
             return jsonify(regress_rain())
+
+@app.route('/data/class/death/<threshold>')
+def make_death_classfication(threshold):
+    death_by_prec_temp = get_death_prec_temp_data()
+    death_by_prec_temp['group'] = death_by_prec_temp['death'].apply(lambda x: 1 if x >= float(threshold) else 0)
+    death_group_clean = death_by_prec_temp[['group','Annual_precip','Annual_temp']].rename(columns={'Annual_precip':'x','Annual_temp':'y'}).to_dict('records')
+    return jsonify(death_group_clean)
+
+@app.route('/data/class/incident/<threshold>')
+def make_incident_classfication(threshold):
+    incident_by_prec_temp = get_incident_prec_temp_data()
+    incident_by_prec_temp['group'] = incident_by_prec_temp['incident'].apply(lambda x: 1 if x >= float(threshold) else 0)
+    incident_group_clean = incident_by_prec_temp[['group','Annual_precip','Annual_temp']].rename(columns={'Annual_precip':'x','Annual_temp':'y'}).to_dict('records')
+    return jsonify(incident_group_clean)
 
     
 if __name__ == "__main__":

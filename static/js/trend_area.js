@@ -6,7 +6,7 @@ width = 880 - margin.left - margin.right,
 height = 480 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#area")
+var area_svg = d3.select("#area")
 .append("svg")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
@@ -44,19 +44,19 @@ var stackedData = d3.stack()
 var x = d3.scaleLinear()
 .domain(d3.extent(data, function(d) { return d.Year; }))
 .range([ 0, width ]);
-var xAxis = svg.append("g")
+var xAxis = area_svg.append("g")
 .attr("transform", "translate(0," + height + ")")
 .call(d3.axisBottom(x).ticks(5))
 
 // Add X axis label:
-svg.append("text")
+area_svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", width/2+margin.left/2)
     .attr("y", height+40 )
     .text("Time (year)");
 
 // Add Y axis label:
-svg.append("text")
+area_svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", 0)
     .attr("y", -20 )
@@ -67,7 +67,7 @@ svg.append("text")
 var y = d3.scaleLinear()
 .domain([0, 5000000])
 .range([ height, 0 ]);
-svg.append("g")
+area_svg.append("g")
 .call(d3.axisLeft(y).ticks(5))
 
 //////////
@@ -75,7 +75,7 @@ svg.append("g")
 //////////
 
 // Add a clipPath: everything out of this area won't be drawn.
-var clip = svg.append("defs").append("svg:clipPath")
+var clip = area_svg.append("defs").append("svg:clipPath")
     .attr("id", "clip")
     .append("svg:rect")
     .attr("width", width )
@@ -89,7 +89,7 @@ var brush = d3.brushX()                 // Add the brush feature using the d3.br
     .on("end", updateChart) // Each time the brush selection changes, trigger the 'updateChart' function
 
 // Create the scatter variable: where both the circles and the brush take place
-var areaChart = svg.append('g')
+var areaChart = area_svg.append('g')
 .attr("clip-path", "url(#clip)")
 
 // Area generator
@@ -164,7 +164,7 @@ var noHighlight = function(d){
 
 // Add one dot in the legend for each name.
 var size = 20
-svg.selectAll("myrect")
+area_svg.selectAll("myrect")
     .data(keys)
     .enter()
     .append("rect")
@@ -177,7 +177,7 @@ svg.selectAll("myrect")
     .on("mouseleave", noHighlight)
 
 // Add one dot in the legend for each name.
-svg.selectAll("mylabels")
+area_svg.selectAll("mylabels")
     .data(keys)
     .enter()
     .append("text")
