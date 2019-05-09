@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 from ml.Malaria_CNN_Test_Model import predict
 from keras.models import load_model
 import tensorflow as tf
-from helper.regression import  regress_child,  regress_gdp, regress_rain
+from helper.regression import regress_child, regress_gdp, regress_rain,regress_temp, qua_child, qua_gdp, qua_percipitation, qua_temp
 from helper.get_mosquitoes_dist import get_mosquitoes_geo, get_mosquitoes_data_period
 from helper.get_classification_data import get_death_prec_temp_data, get_incident_prec_temp_data
 
@@ -86,6 +86,22 @@ def make_regression(feature, model):
         
         elif feature =="Percipitation": 
             return jsonify(regress_rain())
+        
+        elif feature =="Temperature": 
+            return jsonify(regress_temp())
+    
+    elif model=="quadratic": 
+        if feature =="Child Mortality": 
+            return jsonify(qua_child())
+        
+        elif feature =="GDP": 
+            return jsonify(qua_gdp())
+        
+        elif feature =="Percipitation": 
+            return jsonify(qua_percipitation())
+
+        elif feature =="Temperature": 
+            return jsonify(qua_temp())
 
 @app.route('/data/class/death/<threshold>')
 def make_death_classfication(threshold):
