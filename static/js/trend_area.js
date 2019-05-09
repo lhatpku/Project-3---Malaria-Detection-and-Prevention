@@ -46,7 +46,7 @@ var x = d3.scaleLinear()
 .range([ 0, width ]);
 var xAxis = area_svg.append("g")
 .attr("transform", "translate(0," + height + ")")
-.call(d3.axisBottom(x).ticks(5))
+.call(d3.axisBottom(x).ticks(5).tickFormat(d3.format("d")));
 
 // Add X axis label:
 area_svg.append("text")

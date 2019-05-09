@@ -35,10 +35,11 @@
 
     <div class = "section container">
         <h2>Malaria</h2>
-        <p>Malaria is a disease that is transmitted from person to person by infected mosquitoes.<br>
-            Malaria can be fatal. The World Health Organization (WHO) estimates that 438,000 people died because of malaria in 2015;
-            the Institute of Health Metrics and Evaluation (IHME), Global Burden of Disease (GBD) puts this estimate at 620,000 in 2017.
-        </p>
+        <div id='introduction'>
+            <p>Malaria is a serious and sometimes fatal disease caused by a parasite that commonly 
+            infects a certain type of mosquito which feeds on humans. <br>People who get malaria 
+            are typically very sick with high fevers, shaking chills, and flu-like illness.</p>
+        </div>
     </div>
 
     <div style="text-align:center">
@@ -123,12 +124,15 @@
         <h2>Prediction and Prevention</h2>
         <section>
             <h3>Malaria and Mosquitoes Population</h3>
-            <p>Malaria is caused by a one-celled parasite called a Plasmodium. 
-                Female Anopheles mosquitoes pick up the parasite from infected people when they bite to obtain blood needed to nurture their eggs. 
-                Inside the mosquito the parasites reproduce and develop. When the mosquito bites again, 
-                the parasites contained in the salivary gland are injected and pass into the blood of the person being bitten.
+            <p>There are four kinds of parasites that can infect humans with malaria via mosquito vectors, 
+                the Plasmodium falciparum, vivax, ovale, and malariae. Humans become infected with malaria when bitten by a parasitized female Anopheles mosquito. 
+                There are over 400 different species of the Anopheles mosquito, of which about 30 are malaria vectors of major importance. 
+                These mosquitoes become infectious after having a previous blood meal from an infected person. They obtain blood to nurture their eggs, which then also become infected.
             </p>
             <h4>Mosquitoes Population Over-time (in Africa)</h4>
+            <p>In order to design national malaria control and elimination programs, it is important to understand the distribution of the anopheline mosquitoes. 
+                The KEMRI-Wellcome Trust organization compiled a comprehensive dataset of all the published and unpublished studies that contain geocoded information on the anopheline mosquitoes in Africa. 
+                DISCLAIMER: The map does not depict the temporal trend in mosquito population, but the number of studies on those mosquitoes in Africa and where they were found.</p>
             <div id="leaflet-side-bar">
                 <label>Year Category</label>
                 <select class="browser-default" id="period-select">
@@ -234,23 +238,29 @@
                     
                     <li>
                         <div class="collapsible-header"><i class="fas fa-book-medical"></i>Cell Image Detection</div>
-                        <div class="collapsible-body brown lighten-4"><span>Malaria parasites can be identified by examining under the microscope a drop of the patient’s blood, spread out as a “blood smear” on a microscope slide. 
+                        <div class="collapsible-body teal lighten-5"><span>Malaria parasites can be identified by examining under the microscope a drop of the patient’s blood, spread out as a “blood smear” on a microscope slide. 
                             Prior to examination, the specimen is stained to give the parasites a distinctive appearance. 
                             This technique remains the gold standard for laboratory confirmation of malaria. </span></div>
                     </li>
                     <li>
                         <div class="collapsible-header"><i class="fas fa-database"></i>Data</div>
-                        <div class="collapsible-body brown lighten-4"><span>
+                        <div class="collapsible-body teal lighten-5"><span>
                             The dataset comes from <a href="https://www.kaggle.com/iarunava/cell-images-for-detecting-malaria">Kaggle</a>. 
                             The parasitized (infected) cell images are inside the Parasitized folder and uninfected images are inside the Uninfected folder.
                         </span></div>
                     </li>
                     <li>
                         <div class="collapsible-header"><i class="fas fa-laptop-medical"></i>Our Method</div>
-                        <div class="collapsible-body brown lighten-4"><span>
-                            We created the Convolution Layer followed by a MaxPooling layer 
-                            then normalize the output from the previous layers and apply the Dropout regularization. 
-                            Another set of these layers is then appended. 
+                        <div class="collapsible-body teal lighten-5"><span>
+                            We built a convolutional neural network model to predict which cell images are infected with malaria. 
+                            The final sequential model has about 95% training accuracy and 93% validation accuracy. 
+                            The input layer is a 2D convolutional layer, with 32 filters, 3x3 kernel size, 96x96x3 input shape, rectified linear activation function. 
+                            The input layer is followed by batch normalization, 2D max pooling with a 2x2 pool size, and a 40% dropout rate in order to reduce overfitting. 
+                            We put in two hidden 2D convolutional layers with similar specifications as the input layer; the first hidden layer has 64 filters. 
+                            We added a flatten layer to reshape the tensor to 1D. This was followed up with a dense layer with 64 units, rectified linear activation, and a 40% dropout rate. 
+                            The output layer is a dense layer with 1 unit and sigmoid activation. We compiled the model with an Adam optimizer, binary crossentropy loss function, and accuracy metric. 
+                            In the model generator, we used 200 steps per epoch, 10 epochs, and 20 validation steps. To see our model building process more in depth, please visit our 
+                            <a href="https://github.com/lhatpku/Project-3---Malaria-Detection-and-Prevention/blob/master/ml/Malaria_CNN.ipynb" target="_blank">GitHub page</a>.
                         </span></div>
                     </li>
                 </ul>
@@ -301,8 +311,9 @@
             <div class="row">
             <div class="col s12 m8 offset-m2">
                 <h5>About The Project</h5>
-                <p>The project is to give an overview to answer the questions as "what is malaria and how it impacts human society", "how to detect malaria" and "what we can do to better control it"
-                    We use Convolutional Neural Network to detect the disease from cell level and use different regression models to find the best way to control and prevent.
+                <p>The project explores the following questions: What is malaria and how does it impact humans? 
+                    How can we detect malaria? What can we do to better control it? To answer these questions, 
+                    we built a convolutional neural network model to detect the disease at the cellular level and different regression models to determine methods of control and prevention.
                 </p>
             </div>
             </div>
