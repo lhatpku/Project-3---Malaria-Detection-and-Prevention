@@ -107,14 +107,14 @@ def make_regression(feature, model):
 def make_death_classfication(threshold):
     death_by_prec_temp = get_death_prec_temp_data()
     death_by_prec_temp['group'] = death_by_prec_temp['death'].apply(lambda x: 1 if x >= float(threshold) else 0)
-    death_group_clean = death_by_prec_temp[['group','Annual_precip','Annual_temp']].rename(columns={'Annual_precip':'x','Annual_temp':'y'}).to_dict('records')
+    death_group_clean = death_by_prec_temp[['group','Annual_precip','Annual_temp','Country']].rename(columns={'Annual_precip':'x','Annual_temp':'y'}).to_dict('records')
     return jsonify(death_group_clean)
 
 @app.route('/data/class/incident/<threshold>')
 def make_incident_classfication(threshold):
     incident_by_prec_temp = get_incident_prec_temp_data()
     incident_by_prec_temp['group'] = incident_by_prec_temp['incident'].apply(lambda x: 1 if x >= float(threshold) else 0)
-    incident_group_clean = incident_by_prec_temp[['group','Annual_precip','Annual_temp']].rename(columns={'Annual_precip':'x','Annual_temp':'y'}).to_dict('records')
+    incident_group_clean = incident_by_prec_temp[['group','Annual_precip','Annual_temp','Country']].rename(columns={'Annual_precip':'x','Annual_temp':'y'}).to_dict('records')
     return jsonify(incident_group_clean)
 
     

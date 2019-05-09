@@ -21,16 +21,26 @@ var class_svg = d3.select("#classification-chart")
         .append("svg")
         .attr("width", svg_dx)
         .attr("height", svg_dy);
-
+// labels
 var xLabelsGroup = class_svg.append("g")
 .attr("transform",`translate(${svg_dx/2-margin.left},${svg_dy-10})`);
 
-xLabelsGroup.append("text").text("Precipitation (divide by 100)");
+xLabelsGroup.append("text").text("Precipitation (* 100)");
 
 var yLabelsGroup = class_svg.append("g")
 .attr("transform",`translate(${margin.left-60},${15})`);
 
 yLabelsGroup.append("text").text("Temperature");
+
+// tooltip
+var toolTip = d3.tip()
+        .attr('class','d3-tip')
+        .offset([20,-20])
+        .html(d => {
+        let content = `<div class="country_text">${d.Country}</div>`;
+        return content;
+    });
+
 
 d3.json(url).then(d => {
 
@@ -142,7 +152,7 @@ d3.select("#beta_val")
 
 function plotPts(d) {
 
-class_svg.append("g")
+var pts_group = class_svg.append("g")
    .selectAll("path")
    .data(d)
    .enter()
@@ -150,7 +160,11 @@ class_svg.append("g")
    .attr("class", d => d.group == "1" ? "pts group1" : "pts group2")
    .attr("d", d3.symbol().type((d,i) => d.group == "1" ? d3.symbolCircle : d3.symbolCross))
    .attr("transform", d => "translate(" + xPos(d.x) + "," + yPos(d.y) + ")");
-}
+
+   pts_group.call(toolTip);
+   pts_group.on("click",toolTip.show).on("mouseout",toolTip.hide);
+
+};
 
 function plotAxes(x, y) {
 
