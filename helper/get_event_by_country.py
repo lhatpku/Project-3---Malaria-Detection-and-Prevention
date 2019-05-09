@@ -38,7 +38,7 @@ death_country_extract_df = death_country_df[death_year+['Country']+['alpha-2']+[
 ########################
 # Data Export
 ########################
-bin_list = [0,10,100,500,1000,2000,5000,10000]
+bin_list = [0,10,100,1000,2500,4000,6500,9000]
 
 def categorize_case(case_number):
     if (case_number > bin_list[-1]):
